@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: pelu-web
+  name: pelu-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: pelu-web
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.21.0 (992df58d8)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: pelu-web
+    spec:
+      containers:
+      - env:
+        - name: WORDPRESS_DB_HOST
+          value: db
+        - name: WORDPRESS_DB_PASSWORD
+          value: secret
+        - name: WORDPRESS_DB_USER
+          value: manager
+        image: wordpress:4.9.8
+        imagePullPolicy: ""
+        name: pelu-web
+        ports:
+        - containerPort: 80
+        resources: {}
+        volumeMounts:
+        - mountPath: /var/www/html
+          name: pelu-web-claim0
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes:
+      - name: pelu-web-claim0
+        persistentVolumeClaim:
+          claimName: pelu-web-claim0
+status: {}

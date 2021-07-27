@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: pelu-db
+  name: pelu-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: pelu-db
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.21.0 (992df58d8)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: pelu-db
+    spec:
+      containers:
+      - env:
+        - name: MYSQL_DATABASE
+          value: wordpress
+        - name: MYSQL_PASSWORD
+          value: secret
+        - name: MYSQL_ROOT_PASSWORD
+          value: secret
+        - name: MYSQL_USER
+          value: manager
+        image: mariadb:10.3.9
+        imagePullPolicy: ""
+        name: pelu-db
+        resources: {}
+        volumeMounts:
+        - mountPath: /var/lib/mysql
+          name: data
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: data
+status: {}
