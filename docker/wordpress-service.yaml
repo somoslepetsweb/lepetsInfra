@@ -6,15 +6,15 @@ metadata:
     kompose.version: 1.21.0 (992df58d8)
   creationTimestamp: null
   labels:
-    io.kompose.service: pelu-web
-  name: pelu-web
+    io.kompose.service: wordpress
+  name: wordpress
 spec:
   ports:
-  - name: "8080"
-    port: 8080
+  - name: "8000"
+    port: 8000
     targetPort: 80
   selector:
-    io.kompose.service: pelu-web
-  type: LoadBalancer  
+    io.kompose.service: wordpress
+  type: LoadBalancer
 status:
   loadBalancer: {}

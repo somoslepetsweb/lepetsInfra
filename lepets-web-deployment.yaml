@@ -32,7 +32,7 @@ spec:
           value: secret
         - name: WORDPRESS_DB_USER
           value: manager
-        image: wordpress:4.9.8
+        image: wordpress:latest
         imagePullPolicy: ""
         name: pelu-web
         ports:

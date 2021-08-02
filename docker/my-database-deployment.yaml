@@ -6,13 +6,13 @@ metadata:
     kompose.version: 1.21.0 (992df58d8)
   creationTimestamp: null
   labels:
-    io.kompose.service: pelu-db
-  name: pelu-db
+    io.kompose.service: my-database
+  name: my-database
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: pelu-db
+      io.kompose.service: my-database
   strategy:
     type: Recreate
   template:
@@ -22,21 +22,21 @@ spec:
         kompose.version: 1.21.0 (992df58d8)
       creationTimestamp: null
       labels:
-        io.kompose.service: pelu-db
+        io.kompose.service: my-database
     spec:
       containers:
       - env:
         - name: MYSQL_DATABASE
-          value: wordpress
+          value: my_wp_database
         - name: MYSQL_PASSWORD
-          value: secret
+          value: my_wp_user_password
         - name: MYSQL_ROOT_PASSWORD
-          value: secret
+          value: my_password_1234789
         - name: MYSQL_USER
-          value: manager
-        image: mariadb:10.3.9
+          value: my_wp_user
+        image: mysql
         imagePullPolicy: ""
-        name: pelu-db
+        name: my-database
         resources: {}
         volumeMounts:
         - mountPath: /var/lib/mysql
