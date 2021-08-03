@@ -1,0 +1,9 @@
+language: node_js
+sudo: required
+
+services:
+  - docker
+
+script:
+- docker run --rm -v "$(pwd):/sitespeed.io" sitespeedio/sitespeed.io:18.0.1 -b chrome https://somoslepets-wordpress-somoslepetsweb.cloud.okteto.net/admin
+- docker run --rm -v "$(pwd):/sitespeed.io" sitespeedio/sitespeed.io:18.0.1 -b chrome https://somoslepets-wordpress-somoslepetsweb.cloud.okteto.net/
