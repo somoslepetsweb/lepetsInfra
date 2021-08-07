@@ -5,5 +5,9 @@ services:
   - docker
 
 script:
+# Esto es para el sitio de marcos
 - docker run --rm -v "$(pwd):/sitespeed.io" sitespeedio/sitespeed.io:18.0.1 -b chrome https://somoslepets-wordpress-somoslepetsweb.cloud.okteto.net/admin
 - docker run --rm -v "$(pwd):/sitespeed.io" sitespeedio/sitespeed.io:18.0.1 -b chrome https://somoslepets-wordpress-somoslepetsweb.cloud.okteto.net/
+
+# Esto es para el sitio de luchi
+- docker run --rm -v "$(pwd):/sitespeed.io" sitespeedio/sitespeed.io:18.0.1 -b chrome https://contbot-service-alangdc.cloud.okteto.net/login?redirect=%2Fdashboard
